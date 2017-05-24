@@ -1,42 +1,37 @@
-#ifndef CLOG_H_
-#define CLOG_H_
+#ifndef _CLOG_H_
+#define _CLOG_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum
+{
+    CLOG_DEBUG,
+    CLOG_INFO,
+    CLOG_WARN,
+    CLOG_ERROR,
+    CLOG_CRITICAL,
+    CLOG_MAX
+} clog_level_e;
 
 
-/* 
- * Logging Flags
- * - none: 0
- * - info: 1
- * - warn: 2
- * - debug: 3
- * - error: 4
- * - fatal: 5 
- */
+void clog_set_level(clog_level_e lvl);
+clog_level_e clog_get_level();
+
+void clog_set_logfile(const char *fn);
+
+void cloginf(clog_level_e lvl, const char *mod, const char *fmt, ...);
+void clog_debug(const char *mod, const char *fmt, ...);
+void clog_info(const char *mod, const char *fmt, ...);
+void clog_warn(const char *mod, const char *fmt, ...);
+void clog_error(const char *mod, const char *fmt, ...);
+void clog_critical(const char *mod, const char *fmt, ...);
 
 
-/*
- *
- */
-typedef struct {
-  int year;
-  int month;
-  int day;
-  int hour;
-  int min;
-  int sec;
-  int usec;
-} DATETIME;
+#ifdef __cplusplus
+}
+#endif
 
-
-/*
- * 
- */
-const char* version ();
-
-
-/*
- */
-void CLOG_INFO (char module[], char message[]);
-
-
-#endif // CLOG_H_
+#endif
 
